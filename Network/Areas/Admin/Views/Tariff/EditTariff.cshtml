@@ -1,0 +1,15 @@
+﻿@model UpdateTariffViewModel
+@{ 
+    Layout = "~/areas/admin/Views/Shared/_Layout.cshtml";
+}
+<partial name="PartialCSS" />
+<form action="/Admin/Tariff/EditTariff" method="post">
+    <input type="hidden" asp-for="TariffId" />
+    <div class="form-group mb-3">
+        <input asp-for="TariffName" type="text" class="form-control" id="sEmail" aria-describedby="emailHelp1" placeholder="Введите тариф">
+    </div>
+    <div class="form-group mb-3">
+        <select asp-for="OperatorId" asp-items="Model.Operators" class="form-control"></select>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Изменить</button>
+</form>

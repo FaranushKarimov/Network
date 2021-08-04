@@ -23,6 +23,7 @@ namespace Network.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            
             return View();
         }
 

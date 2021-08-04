@@ -9,5 +9,6 @@ namespace Domain.Models
         public int Id { get; set; }
         public string OperatorName { get; set; } 
         public virtual ICollection<Tariff> Tariffs { get; set; }
+        public virtual ICollection<Prefix> Prefixes { get; set; }
     }
 }

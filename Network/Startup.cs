@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Persistence.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +12,13 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Domain.Models;
-using Service.DTO;
-using Service.Account;
+using Network.Data;
+using Network.Account;
+using Network.DTO;
+using Network.Repository;
+using AutoMapper;
+using Network.Services.Tariff;
+using Network.Services.Operator;
 
 namespace Network
 {
@@ -30,9 +34,20 @@ namespace Network
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<ApplicationRepository>();
+            services.AddTransient<DepartmentRepository>();
+            services.AddTransient<OperatorRepository>();
+            services.AddTransient<TariffRepository>();
+            services.AddTransient<IApplicationService,ApplicationService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<ITariffService, TariffService>();
+//            services.AddTransient<IOperatorService, OperatorService>();
             services.AddControllersWithViews();
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies());
+          
+
+            services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("Default")).UseLazyLoadingProxies());
             services.AddIdentity<User, Role>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -47,7 +62,7 @@ namespace Network
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Account/SignIn";   //example login - ýêøí  Sign - Controller
-                options.AccessDeniedPath = "/Account/AccessDenied ";
+                options.AccessDeniedPath = "/Home/Index";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                 options.SlidingExpiration = true;
             });

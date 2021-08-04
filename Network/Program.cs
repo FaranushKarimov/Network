@@ -6,8 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Network.Data;
 using Network.Seed;
-using Persistence.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +24,9 @@ namespace Network
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
             var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+            context.Database.Migrate();
             await DefaultRoleSeed.AddDefaultRoleAsync(roleManager);
             await DefaultUsersSeed.AddDefaultUsersAsync(userManager);
-           await context.Database.MigrateAsync();
            await host.RunAsync();
         }
 

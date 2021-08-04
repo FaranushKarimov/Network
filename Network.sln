@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network", "Network\Network.csproj", "{D8975F47-5AC2-4B06-BE3E-8F39390A108D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Network", "Network\Network.csproj", "{D8975F47-5AC2-4B06-BE3E-8F39390A108D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8A374971-CF10-4E47-8ACC-012D2AF931CA} = {8A374971-CF10-4E47-8ACC-012D2AF931CA}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{4FF315F9-07FC-44E7-8AB7-7DD2C2186521}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{4FF315F9-07FC-44E7-8AB7-7DD2C2186521}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{BA5106C6-8630-4A15-B7FB-B33BEC0D06BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{BA5106C6-8630-4A15-B7FB-B33BEC0D06BC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4FF315F9-07FC-44E7-8AB7-7DD2C2186521} = {4FF315F9-07FC-44E7-8AB7-7DD2C2186521}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{8A374971-CF10-4E47-8ACC-012D2AF931CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{8A374971-CF10-4E47-8ACC-012D2AF931CA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BA5106C6-8630-4A15-B7FB-B33BEC0D06BC} = {BA5106C6-8630-4A15-B7FB-B33BEC0D06BC}
 		{4FF315F9-07FC-44E7-8AB7-7DD2C2186521} = {4FF315F9-07FC-44E7-8AB7-7DD2C2186521}

@@ -9,8 +9,8 @@ namespace Domain.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int ManagerId { get; set; }
-        public int DepartmentId { get; set; }
+        public int? ManagerId { get; set; }
+        public int? DepartmentId { get; set; }
         public bool IsActive { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }

@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Service.Account;
-using Service.Account.DTO;
-using Service.DTO.Account;
+using Network.Account;
+using Network.DTO.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,14 +71,8 @@ namespace Network.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             var result = await _accountService.SignInAsync(model);
-            if (model.ReturnUrl != null)
-                return Redirect(model.ReturnUrl ?? "/");
-            if (User.IsInRole("Admin")) 
-            { 
-                return Redirect("/Admin/Main/Index"); 
-            }
             if (result)
-                return RedirectToAction("Index","Home");
+                return Redirect("/Admin/Main/Index");
             ModelState.AddModelError("SignIn", "Login or password incorrect");
             return View(model);
         }

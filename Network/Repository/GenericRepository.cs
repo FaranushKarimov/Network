@@ -1,4 +1,4 @@
-﻿using Persistence.Extensions;
+﻿using Network.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using static Persistence.Extensions.ClassCompareExtension;
+using static Network.Extensions.ClassCompareExtension;
 
-namespace Persistence.Repository
+namespace Network.Repository
 {
     public abstract class GenericRepository<TContext, TEntity, TKey>
     where TContext : DbContext
