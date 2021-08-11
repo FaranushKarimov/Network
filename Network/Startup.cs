@@ -19,6 +19,7 @@ using Network.Repository;
 using AutoMapper;
 using Network.Services.Tariff;
 using Network.Services.Operator;
+using Network.Services.PhoneNumber;
 
 namespace Network
 {
@@ -39,11 +40,13 @@ namespace Network
             services.AddTransient<DepartmentRepository>();
             services.AddTransient<OperatorRepository>();
             services.AddTransient<TariffRepository>();
+            services.AddTransient<PhoneNumberRepository>();
             services.AddTransient<IApplicationService,ApplicationService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<ITariffService, TariffService>();
-//            services.AddTransient<IOperatorService, OperatorService>();
+            services.AddTransient<IOperatorService, OperatorService>();
+            services.AddTransient<IPhoneService, PhoneService>();
             services.AddControllersWithViews();
           
 

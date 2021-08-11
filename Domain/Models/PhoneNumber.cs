@@ -10,6 +10,7 @@ namespace Domain.Models
         public string TelephoneNumber { get; set; }
         public int PrefixId { get; set; }
         public int UserId { get; set; }
+        public int TariffId { get; set; }
         public virtual User User { get; set; }
     }
 }

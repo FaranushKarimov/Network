@@ -1,4 +1,5 @@
-﻿using Network.DTO.Tariff;
+﻿using Network.DTO.PhoneNumber;
+using Network.DTO.Tariff;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace Network.Services.Tariff
         Task<List<TariffViewModel>> GetAllTariffs();
         Task<UpdateTariffViewModel> GetByTariffId(int id);
         Task Update(UpdateTariffViewModel model);
+        Task<List<GetTariffViewModel>> GetTariffAsync();
     }
 }

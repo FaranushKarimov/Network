@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Network.DTO.PhoneNumber;
 using Network.DTO.Tariff;
 using Network.Repository;
 using System;
@@ -73,6 +74,16 @@ namespace Network.Services.Tariff
             tariff.OperatorId = model.OperatorId;
             tariff.TariffName = model.TariffName;
             await _tariffRepository.Update(tariff);
+        }
+
+        public async Task<List<GetTariffViewModel>> GetTariffAsync()
+        {
+            return await _tariffRepository.Entities.Select(x => new GetTariffViewModel
+            {
+                TariffId = x.Id,
+                TariffName = x.TariffName,
+                OperatorId = x.OperatorId
+            }).ToListAsync();
         }
     }
 }

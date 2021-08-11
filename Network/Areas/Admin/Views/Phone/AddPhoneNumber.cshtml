@@ -1,0 +1,150 @@
+﻿@model AddPhoneViewModel
+@{ 
+    Layout = "~/areas/admin/Views/Shared/_Layout.cshtml";
+}
+<partial name="PartialCSS" />
+<form action="/Admin/Phone/AddPhoneNumber" method="post">
+    <div class="form-group">
+        <div class="form-group col-7">
+            <select asp-items="Model.Operators" id="operators" class="form-control" onchange="changeOperator()"></select>
+        </div>
+        <div class="form-group col-7">
+            <select asp-for="TariffId" asp-items="Model.Tariffs" id="tariffs" class="form-control" onchange="changeTariff()"></select>
+        </div>
+        <div class="form-group col-7">
+            <input asp-for="PhoneNumber" type="text" id="phonenumber" class="form-control" data-inputmask="'mask': '+\\9\\92 99 999 99 99'" placeholder="Введите номер" autocomplete="off" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Добавить Номер</button>
+</form>
+<partial name="PartialJS" />
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $(document).ready(function () {
+                $('#phonenumber').inputmask();
+            });
+        });
+    </script>
+<script>
+    let operatorsSelect = document.getElementById("operators");
+    let tariffsSelect = document.getElementById("tariffs");
+
+    let operators = [];
+
+    let tariffs = [];
+    $.ajax({
+        type: "get",
+        url: "/admin/Phone/GetOperators",
+        success: function (data) {
+            operators = JSON.parse(data);
+        }
+    });
+
+    $.ajax({
+        type: "get",
+        url: "/admin/Phone/GetTariffs",
+        success: function (data) {
+            tariffs = JSON.parse(data);
+        }
+    });
+
+    let currentOperators = operators;
+    let currentTariffs = tariffs;
+
+    fillOperators();
+    fillTariffs();
+    addDefaultTariffOption();
+    addDefaultOperatorOption();
+    function addDefaultOperatorOption() {
+        let defOpt = document.createElement("option");
+        defOpt.value = 0;
+        defOpt.textContent = "Выберите оператора";
+        defOpt.selected = true;
+        operatorsSelect.prepend(defOpt);
+    };
+    function addDefaultTariffOption() {
+        let defOpt = document.createElement("option");
+        defOpt.value = 0;
+        defOpt.selected = true;
+        defOpt.textContent = "Выберите тариф";
+        tariffsSelect.prepend(defOpt);
+    };
+
+    function fillOperators() {
+        operatorsSelect.innerHTML = "";
+        if (tariffsSelect.value === "0") {
+            let defOpt = document.createElement("option");
+            defOpt.value = 0;
+            defOpt.textContent = "Выберите оператора";
+            operatorsSelect.appendChild(defOpt);
+        }
+        currentOperators.forEach(element => {
+            let opt = document.createElement("option");
+            opt.value = element.id;
+            opt.textContent = element.name;
+            operatorsSelect.appendChild(opt);
+        });
+    };
+
+
+    function fillTariffs() {
+        tariffsSelect.innerHTML = "";
+        if (operatorsSelect.value === "0") {
+            let defOpt = document.createElement("option");
+            defOpt.value = 0;
+            defOpt.textContent = "Выберите тарифф";
+            tariffsSelect.appendChild(defOpt);
+        }
+        currentTariffs.forEach(element => {
+            let opt = document.createElement("option");
+            opt.value = element.id;
+            opt.textContent = element.name;
+            tariffsSelect.appendChild(opt);
+        });
+    };
+
+    function changeTariff() {
+        if (tariffsSelect.value === "0") {
+            currentTariffs = tariffs;
+            currentOperators = operators;
+            fillOperators();
+        } else if (currentTariffs.length !== tariffs.length) {
+            return;
+        } else {
+            currentOperators = [];
+            let currentTariff = null;
+            tariffs.forEach(tariff => {
+                if (String(tariff.id) === tariffsSelect.value) {
+                    currentTariff = tariff;
+                }
+            });
+            operators.forEach(operator => {
+                if (operator.id === currentTariff.operator) {
+                    currentOperators.push(operator);
+                }
+            });
+            fillOperators();
+        }
+    };
+    function changeOperator() {
+        if (operatorsSelect.value === "0") {
+            currentTariffs = tariffs;
+            currentOperators = operators;
+            fillTariffs();
+        } else if (currentOperators.length !== operators.length) {
+            return;
+        } else {
+            currentTariffs = [];
+            tariffs.forEach(tariff => {
+                if (tariff.operator == operatorsSelect.value) {
+                    currentTariffs.push(tariff);
+                }
+            });
+            fillTariffs();
+        }
+    };
+</script>
+       
+    
+
+
