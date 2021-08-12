@@ -6,10 +6,10 @@
 <form action="/Admin/Phone/AddPhoneNumber" method="post">
     <div class="form-group">
         <div class="form-group col-7">
-            <select asp-items="Model.Operators" id="operators" class="form-control" onchange="changeOperator()"></select>
+            <select  id="operators" class="form-control" onchange="changeOperator()"></select>
         </div>
         <div class="form-group col-7">
-            <select asp-for="TariffId" asp-items="Model.Tariffs" id="tariffs" class="form-control" onchange="changeTariff()"></select>
+            <select asp-for="TariffId"  id="tariffs" class="form-control" onchange="changeTariff()"></select>
         </div>
         <div class="form-group col-7">
             <input asp-for="PhoneNumber" type="text" id="phonenumber" class="form-control" data-inputmask="'mask': '+\\9\\92 99 999 99 99'" placeholder="Введите номер" autocomplete="off" />
@@ -19,42 +19,51 @@
 </form>
 <partial name="PartialJS" />
     <script type="text/javascript">
+        
+
+        var operatorsSelect = document.getElementById("operators");
+        var tariffsSelect = document.getElementById("tariffs");
+
+        var operators = [];
+
+        var tariffs = [];
+        var currentOperators = [];
+        var currentTariffs = [];
+
+        
+
         jQuery(function ($) {
             $(document).ready(function () {
                 $('#phonenumber').inputmask();
+                $.ajax({
+                    type: "get",
+                    url: "/admin/Phone/GetOperators",
+                    success: function (data) {
+                        operators = JSON.parse(data);
+                        currentOperators = operators;
+                        fillOperators();
+                        addDefaultOperatorOption();
+                    }
+                });
+
+                $.ajax({
+                    type: "get",
+                    url: "/admin/Phone/GetTariffs",
+                    success: function (data) {
+                        tariffs = JSON.parse(data);
+                        currentTariffs = tariffs;
+                        fillTariffs();
+                        //addDefaultTariffOption();
+
+                    }
+                });
             });
         });
+
+
     </script>
 <script>
-    let operatorsSelect = document.getElementById("operators");
-    let tariffsSelect = document.getElementById("tariffs");
-
-    let operators = [];
-
-    let tariffs = [];
-    $.ajax({
-        type: "get",
-        url: "/admin/Phone/GetOperators",
-        success: function (data) {
-            operators = JSON.parse(data);
-        }
-    });
-
-    $.ajax({
-        type: "get",
-        url: "/admin/Phone/GetTariffs",
-        success: function (data) {
-            tariffs = JSON.parse(data);
-        }
-    });
-
-    let currentOperators = operators;
-    let currentTariffs = tariffs;
-
-    fillOperators();
-    fillTariffs();
-    addDefaultTariffOption();
-    addDefaultOperatorOption();
+    
     function addDefaultOperatorOption() {
         let defOpt = document.createElement("option");
         defOpt.value = 0;
@@ -80,8 +89,8 @@
         }
         currentOperators.forEach(element => {
             let opt = document.createElement("option");
-            opt.value = element.id;
-            opt.textContent = element.name;
+            opt.value = element.OperatorId;
+            opt.textContent = element.OperatorName;
             operatorsSelect.appendChild(opt);
         });
     };
@@ -92,13 +101,13 @@
         if (operatorsSelect.value === "0") {
             let defOpt = document.createElement("option");
             defOpt.value = 0;
-            defOpt.textContent = "Выберите тарифф";
+            defOpt.textContent = "Выберите тариф";
             tariffsSelect.appendChild(defOpt);
         }
         currentTariffs.forEach(element => {
             let opt = document.createElement("option");
-            opt.value = element.id;
-            opt.textContent = element.name;
+            opt.value = element.TariffId;
+            opt.textContent = element.TariffName;
             tariffsSelect.appendChild(opt);
         });
     };
@@ -114,12 +123,12 @@
             currentOperators = [];
             let currentTariff = null;
             tariffs.forEach(tariff => {
-                if (String(tariff.id) === tariffsSelect.value) {
+                if (String(tariff.TariffId) === tariffsSelect.value) {
                     currentTariff = tariff;
                 }
             });
             operators.forEach(operator => {
-                if (operator.id === currentTariff.operator) {
+                if (operator.OperatorId === currentTariff.OperatorId) {
                     currentOperators.push(operator);
                 }
             });
@@ -136,7 +145,7 @@
         } else {
             currentTariffs = [];
             tariffs.forEach(tariff => {
-                if (tariff.operator == operatorsSelect.value) {
+                if (tariff.OperatorId == operatorsSelect.value) {
                     currentTariffs.push(tariff);
                 }
             });

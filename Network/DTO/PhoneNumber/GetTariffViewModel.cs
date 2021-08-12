@@ -10,6 +10,5 @@ namespace Network.DTO.PhoneNumber
          public int TariffId { get; set; }
          public string TariffName { get; set; }
          public int OperatorId { get; set; }
-         public GetOperatorViewModel Operator { get; set; }
     }
 }
