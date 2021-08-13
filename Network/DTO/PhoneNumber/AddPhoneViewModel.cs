@@ -10,6 +10,7 @@ namespace Network.DTO.PhoneNumber
     {
         public string PhoneNumber { get; set; }
         public int TariffId { get; set; }
+     //   public int OperatorId { get; set; }
         public List<SelectListItem> Tariffs { get; set; }
         public List<SelectListItem> Operators { get; set; }
     }

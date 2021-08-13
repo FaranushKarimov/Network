@@ -81,7 +81,7 @@ namespace Network.Services.Tariff
             return await _tariffRepository.Entities.Select(x => new GetTariffViewModel
             {
                 TariffId = x.Id,
-                TariffName = x.TariffName,
+                TariffName = x.TariffName, 
                 OperatorId = x.OperatorId
             }).ToListAsync();
         }

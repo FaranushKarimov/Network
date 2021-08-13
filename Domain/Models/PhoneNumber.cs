@@ -11,6 +11,9 @@ namespace Domain.Models
         public int PrefixId { get; set; }
         public string UserId { get; set; }
         public int TariffId { get; set; }
+        public int OperatorId { get; set; }
         public virtual User User { get; set; }
+        public virtual Operator Operator { get; set; }
+        public virtual Tariff Tariff { get; set; }
     }
 }

@@ -66,8 +66,15 @@ namespace Network.Controllers
                 return View(model);
             }
             await _phoneService.Create(model);
-            return Redirect("");
+            return Redirect("/Admin/Phone/GetPhones");
+        }
 
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetPhones()
+        {
+            var phones = await _phoneService.GetAllPhones();
+            return View(phones);
         }
         public IActionResult Index()
         {
