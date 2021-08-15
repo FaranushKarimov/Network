@@ -41,6 +41,7 @@ namespace Network
             services.AddTransient<OperatorRepository>();
             services.AddTransient<TariffRepository>();
             services.AddTransient<PhoneNumberRepository>();
+            services.AddTransient<PrefixRepository>();
             services.AddTransient<IApplicationService,ApplicationService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IDepartmentService, DepartmentService>();

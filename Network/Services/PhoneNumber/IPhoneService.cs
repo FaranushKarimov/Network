@@ -10,5 +10,7 @@ namespace Network.Services.PhoneNumber
     {
         Task<Domain.Models.PhoneNumber> Create(AddPhoneViewModel model);
         Task<List<PhoneNumberViewModel>> GetAllPhones();
+        Task Update(UpdatePhoneNumberViewModel model);
+        Task<UpdatePhoneNumberViewModel> GetByPhoneId(int id);
     }
 }

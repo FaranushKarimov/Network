@@ -71,6 +71,26 @@ namespace Network.Controllers
 
         [Authorize]
         [HttpGet]
+        public async Task<IActionResult> EditPhoneNumber(int id)
+        {
+            var phone = await _phoneService.GetByPhoneId(id);
+            return View(phone);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> EditPhoneNumber(UpdatePhoneNumberViewModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            await _phoneService.Update(model);
+            return Redirect("/Admin/Phone/GetPhones");
+        }
+
+        [Authorize]
+        [HttpGet]
         public async Task<IActionResult> GetPhones()
         {
             var phones = await _phoneService.GetAllPhones();
