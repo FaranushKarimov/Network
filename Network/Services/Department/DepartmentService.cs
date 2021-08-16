@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Network.DTO.Account;
 using Network.Repository;
 using System;
@@ -59,6 +60,12 @@ namespace Network.DTO
             var department = await _departmentRepository.Get(id);
             var departmentDTO = _mapper.Map<DepartmentViewModel>(department);
             return departmentDTO; 
+        }
+        
+        public async Task<List<SelectListItem>> GetDepartmentList()
+        {
+            var result = await _departmentRepository.GetDepartmentList();
+            return result;
         }
     }
 }

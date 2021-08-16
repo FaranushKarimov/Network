@@ -75,6 +75,7 @@ namespace Network.DTO
             {
                 UserName = model.UserName,
                 Email = model.Email,
+                DepartmentId = (model.DepartmentId == 0? null : model.DepartmentId)
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -95,5 +96,7 @@ namespace Network.DTO
         {
             await _signInManager.SignOutAsync();
         }
+
+        
     }
 }

@@ -45,15 +45,23 @@
                                     <input id="password" asp-for="Password" name="password" type="password" value="" placeholder="Password">
                                 </div>
                                 @*<div id="password-field" class="field-wrapper input mb-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                                        <input id="repeatpassword" asp-for="RepeatPassword" name="repeatpassword" type="password" placeholder="Repeat Password">
-                                </div>*@
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <input id="repeatpassword" asp-for="RepeatPassword" name="repeatpassword" type="password" placeholder="Repeat Password">
+        </div>*@
                                 <div id="roles-field" class="field-wrapper input">
-                                    <label for="exampleFormControlSelect2">ROLE</label>
-                                    <select  asp-items="Model.Roles" class="form-control" id="exampleFormControlSelect2">
+                                    <label for="exampleFormControlSelect2">Роль</label>
+                                    <select asp-items="Model.Roles" asp-for="Role" class="form-control" id="exampleFormControlSelect2">
                                     </select>
-                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                    @*<span asp-validation-for="Email" class="text-danger"></span>*@
                                 </div>
+
+                                <div class="field-wrapper input">
+                                    <label for="exampleFormControlSelect2">Департамент</label>
+                                    <select asp-items="Model.Departments" asp-for="DepartmentId" class="form-control">
+
+                                    </select>
+                                </div>
+
                                 <div class="field-wrapper terms_condition">
                                     <div class="n-chk new-checkbox checkbox-outline-primary">
                                         <label class="new-control new-checkbox checkbox-outline-primary">
@@ -71,7 +79,7 @@
                                         </label>
                                     </div>
                                     <div class="field-wrapper">
-                                      <button asp-controller="Account" asp-action="SignUp" type="submit" class="btn btn-primary" value="">Get Started!</button>
+                                        <button asp-controller="Account" asp-action="SignUp" type="submit" class="btn btn-primary" value="">Get Started!</button>
                                     </div>
                                 </div>
 

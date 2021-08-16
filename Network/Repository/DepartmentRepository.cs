@@ -16,7 +16,7 @@ namespace Network.Repository
         {
 
         }
-        public async Task <List<SelectListItem>> GetDepartmentList()
+        public async Task<List<SelectListItem>> GetDepartmentList()
         {
             return await context.Departments.Select(x => new SelectListItem { Text = x.DepartmentName, Value = x.DepartmentId.ToString() }).ToListAsync();
         }

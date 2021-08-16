@@ -1,4 +1,5 @@
 ﻿using Domain.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Network.DTO.Account;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Network.DTO
         Task<List<DepartmentViewModel>> GetAll();
         Task<DepartmentViewModel> GetById(int id);
         Task Delete (int id);
+        Task<List<SelectListItem>> GetDepartmentList();
 
     }
 }

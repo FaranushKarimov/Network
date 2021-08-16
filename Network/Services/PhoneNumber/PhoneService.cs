@@ -27,7 +27,7 @@ namespace Network.Services.PhoneNumber
         public async Task<Domain.Models.PhoneNumber> Create(AddPhoneViewModel addPhoneViewModel)
         {
             var prefix = _prefixRepository.Entities.FirstOrDefault(x => x.PrefixNumber == int.Parse(string.Join("", addPhoneViewModel.PhoneNumber.Where(Char.IsDigit).Skip(3).Take(2))));
-            var tariff = _tariffRepository.Entities.FirstOrDefault(x => x.Id == addPhoneViewModel.TariffId);
+             var tariff = _tariffRepository.Entities.FirstOrDefault(x => x.Id == addPhoneViewModel.TariffId);
             if (tariff != null && prefix != null)
             {
                 var model = new Domain.Models.PhoneNumber

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Network.Account;
+using Network.DTO;
 using Network.DTO.Account;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,11 @@ namespace Network.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
-        public AccountController(UserManager<User> userManager, IAccountService accountService)
+        private readonly IDepartmentService _departmentService;
+        public AccountController(UserManager<User> userManager, IAccountService accountService,IDepartmentService departmentService)
         {
             _accountService = accountService;
+            _departmentService = departmentService;
         }
 
         [HttpGet]
@@ -34,7 +37,8 @@ namespace Network.Controllers
         {
             var model = new RegisterViewModel
             {
-                Roles = await _accountService.GetRolesAsync()
+                Roles = await _accountService.GetRolesAsync(),
+                Departments = await _departmentService.GetDepartmentList()
             };
             return View(model);
         }
@@ -52,8 +56,7 @@ namespace Network.Controllers
             {
                 ModelState.AddModelError(resultError.Code, resultError.Description);
             }
-
-            return View(model);
+            return View("SignIn");
         }
 
         [HttpGet]
