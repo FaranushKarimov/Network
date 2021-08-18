@@ -11,5 +11,6 @@ namespace Network.DTO.Account
         public int DepartmentId { get; set; }
         [Display(Name = "DepartmentName")]
         public string DepartmentName { get; set; }
+
     }
 }

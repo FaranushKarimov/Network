@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Network.Account;  
 using Network.DTO.Account;
+using System;
 
 namespace Network.DTO
 {
@@ -75,7 +76,8 @@ namespace Network.DTO
             {
                 UserName = model.UserName,
                 Email = model.Email,
-                DepartmentId = (model.DepartmentId == 0? null : model.DepartmentId)
+                DepartmentId = (model.DepartmentId == 0? null : model.DepartmentId),
+                Created = DateTime.Now
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
