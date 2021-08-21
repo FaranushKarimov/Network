@@ -11,7 +11,8 @@ namespace Domain.Models
         public string ApplicationReason { get; set; }
         public DateTime CreatedAt { get; set; }
         public int StatusId { get; set; }
-        public int ManagerId { get; set; }
+        public string ManagerId { get; set; }
         public virtual Manager Manager { get; set; }
+
     }
 }

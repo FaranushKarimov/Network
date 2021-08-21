@@ -21,11 +21,14 @@ namespace Network.DTO
         public async Task<Domain.Models.Application> CreateAsync(AddApplicationViewModel addApplicationViewModel)
         {
             //var model = _mapper.Map<Domain.Models.Application>(addApplicationViewModel);
+            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var userName = User.FindFirstValue(ClaimTypes.Name);
             var model = new Domain.Models.Application
             {
                 ApplicationReason = addApplicationViewModel.ApplicationReason,
                 ManagerId = addApplicationViewModel.ManagerId
             };
+           
             model.CreatedAt = DateTime.Now;
             model.StatusId = 1;
             return await _applicationRepository.Create(model);   
