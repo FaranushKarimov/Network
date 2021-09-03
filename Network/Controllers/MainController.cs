@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Network.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+   // [Area("Admin")]
     public class MainController : Controller
     {
         private readonly UserManager<User> userManager;
@@ -57,7 +57,7 @@ namespace Network.Areas.Admin.Controllers
         public async Task<IActionResult> AddApplication(string ManagerId)
         {
             var currentUser = userManager.GetUserAsync(User);
-            var application = applicationRepository.Entities.FirstOrDefault(x => x.ManagerId == currentUser.Id.ToString());
+            var application = applicationRepository.Entities.FirstOrDefault(x => x.UserId == currentUser.Id.ToString());
             var model = new AddApplicationViewModel
             {
                 Departments = await departmentRepository.GetDepartmentList(),
@@ -71,14 +71,15 @@ namespace Network.Areas.Admin.Controllers
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> AddApplication(AddApplicationViewModel model)
+        
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var userName = User.FindFirstValue(ClaimTypes.Name);
 
-            model.ManagerId = userId;
+            model.UserId = userId;
             model.FullName = userName;
 
-            await applicationService.CreateAsync(model);
+            await applicationService.CreateAsync(model,User);
             return View();
         }
     }

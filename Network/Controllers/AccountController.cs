@@ -75,7 +75,8 @@ namespace Network.Controllers
                 return View(model);
             var result = await _accountService.SignInAsync(model);
             if (result)
-                return Redirect("/Admin/Main/Index");
+                return Redirect("/Main/Index");
+            
             ModelState.AddModelError("SignIn", "Login or password incorrect");
             return View(model);
         }

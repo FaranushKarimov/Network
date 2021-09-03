@@ -25,7 +25,7 @@ namespace Network
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
             var context = scope.ServiceProvider.GetRequiredService<DataContext>();
            // context.Database.Migrate();
-            context.Database.EnsureCreated();
+            context.Database.Migrate();
             await DefaultRoleSeed.AddDefaultRoleAsync(roleManager);
             await DefaultUsersSeed.AddDefaultUsersAsync(userManager);
            await host.RunAsync();

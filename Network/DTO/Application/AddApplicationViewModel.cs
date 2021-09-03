@@ -8,7 +8,7 @@ namespace Network.DTO.Application
 {
     public class AddApplicationViewModel
     {
-        public string ManagerId { get; set; }
+        public string UserId { get; set; }
         public string FullName { get; set; }
         public int DepartmentId { get; set; }
         public string ApplicationReason { get; set; }
